@@ -1,4 +1,8 @@
 <?php 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     $hotels = [
 
         [
@@ -42,11 +46,12 @@
 
     $hotel_name =[];
     
-        for($i ; $i<count($hotels); $i++ ){
-            $hotel_name = $hotels[$i]['name'];
-            echo $hotel_name."<br>";
-        }
-    
+        // for($i ; $i<count($hotels); $i++ ){
+        //     $hotel_name = $hotels[$i]['name'];
+        //     echo $hotel_name."<br>";
+        //     var_dump($hotel_name);
+           
+        // }
 ?>
 
 <!DOCTYPE html>
@@ -84,16 +89,30 @@
             <!-- qua ciclo di nuovo con il foreach e dico che la key è item_2 -->
             <?php foreach($item as $key => $item_2) {?>
             <td>
-                <?php 
-                    if($item_2['parking']){
-                    echo 'SI';
+                <?php
+                    // if($item_2['parking']){
+                    // echo 'SI';
+                    // }
+                    // else{
+                    //     echo 'NO';
+                    // };
+                    // provavo a scorrere l'array come se fossero singoli elementi
+                 ?>
+                <?php
+                    // echo $key."<br>";
+                    if($key == 'parking'){
+                        // echo 'questo è un parcheggio: '.$item_2;
+                        if($item_2){
+                            echo 'Sì';
+                        }
+                        else{
+                            echo 'No';
+                        }
                     }
                     else{
-                        echo 'NO';
-                    };
-                ?>
-                <?php
-                    echo $item_2;
+                        echo $item_2;
+
+                    }
                 ?>
             </td>
             <?php }?>
