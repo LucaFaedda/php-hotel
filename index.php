@@ -43,15 +43,11 @@
 
     ];
 
+    for($i = 0; $i < count($hotels); $i++){
+        $key = array_search($hotels[$i], $hotels);
+        
+    }
 
-    $hotel_name =[];
-    
-        // for($i ; $i<count($hotels); $i++ ){
-        //     $hotel_name = $hotels[$i]['name'];
-        //     echo $hotel_name."<br>";
-        //     var_dump($hotel_name);
-           
-        // }
 ?>
 
 <!DOCTYPE html>
@@ -64,17 +60,25 @@
     <title>PHP Hotel</title>
 </head>
 <body>
+    <form method="GET" action="">
+        <select name="category">
+            <option value="1">Parking</option>
+            <option value="2">Vote</option>
+
+        </select>
+    </form>
     <div>
-        <!-- <?php foreach($hotels as $item){
-            foreach($item as $item_2){
-                echo $item_2."<br>";
-            }
-        };
-         ?> -->
+        <?php
+        //  foreach($hotels as $item){
+        //     foreach($item as $item_2){
+        //         echo $item_2."<br>";
+        //     }
+        // }; 
+         ?>
     </div>
-    <table class="table">
+    <table class="table m-5">
   <thead>
-    <tr>
+    <tr>       
       <th scope="col">Name</th>
       <th scope="col">Description</th>
       <th scope="col">Parking</th>
