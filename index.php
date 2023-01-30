@@ -38,6 +38,15 @@
         ],
 
     ];
+
+
+    $hotel_name =[];
+    
+        for($i ; $i<count($hotels); $i++ ){
+            $hotel_name = $hotels[$i]['name'];
+            echo $hotel_name."<br>";
+        }
+    
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +85,7 @@
             <?php foreach($item as $key => $item_2) {?>
             <td>
                 <?php 
-                    if($item_2 == 'parking'){
+                    if($item_2['parking']){
                     echo 'SI';
                     }
                     else{
