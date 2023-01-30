@@ -51,12 +51,45 @@
 </head>
 <body>
     <div>
-        <?php foreach($hotels as $item){
+        <!-- <?php foreach($hotels as $item){
             foreach($item as $item_2){
                 echo $item_2."<br>";
             }
         };
-         ?>
+         ?> -->
     </div>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Parking</th>
+      <th scope="col">Vote</th>
+      <th scope="col">Distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- qua faccio il primo ciclo -->
+    <?php foreach($hotels as $item){ ?>
+        <tr>
+            <!-- qua ciclo di nuovo con il foreach e dico che la key è item_2 -->
+            <?php foreach($item as $key => $item_2) {?>
+            <td>
+                <?php 
+                    if($item_2['parking']){
+                    echo 'SI';
+                    }
+                    else{
+                        echo 'NO';
+                    };
+                ?>
+                <?php
+                    echo $item_2;
+                ?>
+            </td>
+            <?php }?>
+        </tr>
+    <?php }?>   
+</table>
 </body>
 </html>
