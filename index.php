@@ -43,10 +43,30 @@
 
     ];
 
-    for($i = 0; $i < count($hotels); $i++){
-        $key = array_search($hotels[$i], $hotels);
-        
+    $hotelFiltrati = $hotels;
+    if(isset($_GET['vote']) && $_GET['vote'] !== ''){
+        $hotelTemporanei = [];
+        foreach($hotels as $hotel){
+            if($hotel['vote'] >= $_GET['vote']){ // se il voto hotel è maggiore o uuguale a  get_vote (che andiamo a cambiare con input) lo inseriamo in tempHotels
+                $tempHotels [] = $hotel; //qua dico che il nuovo array è uguale all’array di prima
+            }
+        }
+
+        $hotelFiltrati = $tempHotels;  // poi dopo devo cambiare anche l’array nel foreach in tabella
     }
+
+    if(isset($_GET['parking']) && $_GET['parking'] !== ''){
+	    $tempHotels =[];
+	    foreach($hotels as $hotel){
+	        if($hotelFiltrati['parking'] == $_GET['parking']){
+                $tempHotels [] = $hotel;
+            }
+        }
+        $hotelFiltrati = $tempHotels;  
+    }
+
+
+
 
 ?>
 
@@ -60,68 +80,69 @@
     <title>PHP Hotel</title>
 </head>
 <body>
-    <form method="GET" action="">
-        <select name="category">
-            <option value="1">Parking</option>
-            <option value="2">Vote</option>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 my-5">
+                <form method="GET" action="./index.php">
+                    <input type="number" name="vote">
+                    <select name="category">
+                        <option value="">Parking</option>
+                        <option value="0">no</option>
+                        <option value="1">si</option>
+                    </select>
+                    <button class="btn btn-primary" type="submit">Filtra</button>
+                </form>
 
-        </select>
-    </form>
-    <div>
-        <?php
-        //  foreach($hotels as $item){
-        //     foreach($item as $item_2){
-        //         echo $item_2."<br>";
-        //     }
-        // }; 
-         ?>
-    </div>
-    <table class="table m-5">
-  <thead>
-    <tr>       
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Parking</th>
-      <th scope="col">Vote</th>
-      <th scope="col">Distance</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- qua faccio il primo ciclo -->
-    <?php foreach($hotels as $item){ ?>
-        <tr>
-            <!-- qua ciclo di nuovo con il foreach e dico che la key è item_2 -->
-            <?php foreach($item as $key => $item_2) {?>
-            <td>
-                <?php
-                    // if($item_2['parking']){
-                    // echo 'SI';
-                    // }
-                    // else{
-                    //     echo 'NO';
-                    // };
-                    // provavo a scorrere l'array come se fossero singoli elementi
-                 ?>
-                <?php
-                    // echo $key."<br>";
-                    if($key == 'parking'){
-                        // echo 'questo è un parcheggio: '.$item_2;
-                        if($item_2){
-                            echo 'Sì';
+            </div>
+        </div>
+
+        <table class="table m-5">
+      <thead>
+        <tr>       
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Parking</th>
+          <th scope="col">Vote</th>
+          <th scope="col">Distance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- qua faccio il primo ciclo -->
+        <?php foreach($hotelFiltrati as $item){ ?>
+            <tr>
+                <!-- qua ciclo di nuovo con il foreach e dico che la key è item_2 -->
+                <?php foreach($item as $key => $item_2) {?>
+                <td>
+                    <?php
+                        // if($item_2['parking']){
+                        // echo 'SI';
+                        // }
+                        // else{
+                        //     echo 'NO';
+                        // };
+                        // provavo a scorrere l'array come se fossero singoli elementi
+                     ?>
+                    <?php
+                        // echo $key."<br>";
+                        if($key == 'parking'){
+                            // echo 'questo è un parcheggio: '.$item_2;
+                            if($item_2){
+                                echo 'Sì';
+                            }
+                            else{
+                                echo 'No';
+                            }
                         }
                         else{
-                            echo 'No';
+                            echo $item_2;
+    
                         }
-                    }
-                    else{
-                        echo $item_2;
-
-                    }
-                ?>
-            </td>
-            <?php }?>
-        </tr>
-    <?php }?>   
-</table>
+                    ?>
+                </td>
+                <?php }?>
+            </tr>
+        <?php }?>   
+    </table>
+    </div>
 </body>
 </html>
