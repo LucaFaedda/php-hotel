@@ -48,21 +48,22 @@
         $hotelTemporanei = [];
         foreach($hotels as $hotel){
             if($hotel['vote'] >= $_GET['vote']){ // se il voto hotel è maggiore o uuguale a  get_vote (che andiamo a cambiare con input) lo inseriamo in tempHotels
-                $tempHotels [] = $hotel; //qua dico che il nuovo array è uguale all’array di prima
+                $hotelTemporanei [] = $hotel; //qua dico che il nuovo array è uguale all’array di prima
             }
         }
 
-        $hotelFiltrati = $tempHotels;  // poi dopo devo cambiare anche l’array nel foreach in tabella
+        $hotelFiltrati = $hotelTemporanei;  // poi dopo devo cambiare anche l’array nel foreach in tabella
     }
 
+
     if(isset($_GET['parking']) && $_GET['parking'] !== ''){
-	    $tempHotels =[];
-	    foreach($hotels as $hotel){
-	        if($hotelFiltrati['parking'] == $_GET['parking']){
-                $tempHotels [] = $hotel;
+	    $hotelTemporanei =[];
+	    foreach($hotelFiltrati as $hotel){
+	        if($hotel['parking'] == $_GET['parking']){
+                $hotelTemporanei [] = $hotel;
             }
         }
-        $hotelFiltrati = $tempHotels;  
+        $hotelFiltrati = $hotelTemporanei;  
     }
 
 
@@ -84,11 +85,11 @@
         <div class="row">
             <div class="col-12 my-5">
                 <form method="GET" action="./index.php">
-                    <input type="number" name="vote">
-                    <select name="category">
+                    <input type="number" name="vote" placeholder="Scegli il voto">
+                    <select name="parking">
                         <option value="">Parking</option>
-                        <option value="0">no</option>
-                        <option value="1">si</option>
+                        <option value="0">No</option>
+                        <option value="1">Si</option>
                     </select>
                     <button class="btn btn-primary" type="submit">Filtra</button>
                 </form>
